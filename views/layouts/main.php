@@ -38,7 +38,7 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Users', 'url' => ['/site/users']],
+        ['label' => 'Users', 'url' => ['/users']],
     ];
        if( Yii::$app->user->isGuest){
            array_push($navItem,['label' => 'Login', 'url' => ['/site/login']],['label' => 'Register', 'url' => ['/site/register']]) ;
