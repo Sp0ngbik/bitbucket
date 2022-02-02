@@ -37,6 +37,8 @@ class Users extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+  
     public function attributeLabels()
     {
         return [

@@ -14,7 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="users-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <!-- // ['label' => 'Users', 'url' => [Yii::$app->user->isGuest ?null:  '/users' -->
 
     <p>
   
@@ -27,13 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <?php $model->password=Yii::$app->getSecurity()->generatePasswordHash($model->password)?>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'username:ntext',
-          
             'id',
+            'username:ntext',
+            'password:ntext',
+            'acess_token:ntext',
+            'auth_key:ntext',
+            
         ],
     ]) ?>
 
