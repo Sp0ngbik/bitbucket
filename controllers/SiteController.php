@@ -134,7 +134,9 @@ class SiteController extends Controller
         if ($model->validate()) {
             // form inputs are valid, do something here
             $model->username = $_POST['NewUser']['username'];
-            $model->password = password_hash($_POST["NewUser"]["password"], PASSWORD_ARGON2I);
+            // $model->password = password_hash($_POST["NewUser"]["password"], PASSWORD_ARGON2I);
+            // $model->password = password_hash($_POST["NewUser"]["password"], PASSWORD_ARGON2I);
+            $model->password = $hash = Yii::$app->getSecurity($_POST["NewUser"]["password"])->generatePasswordHash($model->password);
             $model->auth_key = md5(random_bytes(5));
             $model->acess_token = password_hash(random_bytes(10),PASSWORD_DEFAULT);
             if($model->save()){
