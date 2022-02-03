@@ -6,6 +6,8 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
+use yii\captcha\Captcha;
+
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,14 +35,23 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
-
+      <?php $counter =0 ?>
+      <?php echo $counter?>
+        <?= $counter =1? $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-12">{input}</div></div>',
+                    ]) :null?>
+     
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-        </div>
-    
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button'] ) ?>
 
+            </div>
+
+        </div>
+       
+
+                  
+      
     <?php ActiveForm::end(); ?>
 
     <div class="offset-lg-1" style="color:#999;">
