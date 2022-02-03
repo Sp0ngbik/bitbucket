@@ -14,10 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="users-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-  
-        <?= Yii::$app->user->isGuest ?null:Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id, ], ['class' => 'btn btn-primary']) ?>
         <?= Yii::$app->user->isGuest ?null:Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -26,8 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-    <?php $model->password=Yii::$app->getSecurity()->generatePasswordHash($model->password)?>
-
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -38,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'auth_key:ntext',
             
         ],
-    ]) ?>
+        ]) ?>
+        <?php?>
 
 </div>
