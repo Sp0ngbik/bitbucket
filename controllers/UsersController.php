@@ -7,6 +7,8 @@ use app\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 use Yii;
 
 /**
@@ -24,12 +26,31 @@ class UsersController extends Controller
             [
                 'verbs' => [
                     'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
+
+                        'actions' => [
+                            'delete' => ['POST'],
+                        ],
+                       
                 ],
-            ]
-        );
+            ],
+         [ 'access' => [
+            'class' => AccessControl::class,
+            'only' => ['update', 'delete'],
+            'rules' => [
+                [
+                    'allow' => false,
+                    'actions' => ['update','delete' ],
+                    'roles' => ['?'],
+                ],
+             [
+                 'allow'=> true,
+                 'actions' => ['update','delete' ],
+                 'roles' => ['@'], 
+             ]
+            ],
+        ]]
+    );
+
     }
 
     /**
