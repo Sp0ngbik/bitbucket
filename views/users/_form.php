@@ -3,7 +3,7 @@
 // use Yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\widgets\Alert;
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
 /* @var $form yii\widgets\ActiveForm */
@@ -17,7 +17,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'password')->textarea(['rows' => 1]) ?>
+    <?= $form->field($model, 'newPassword')->textarea(['rows' => 1]) ?>
+    <?= $form->field($model, 'newPasswordConfirm')->textarea(['rows' => 1]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success'])?>
         

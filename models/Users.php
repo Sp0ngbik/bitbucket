@@ -15,6 +15,9 @@ use Yii;
  */
 class Users extends \yii\db\ActiveRecord
 {
+    public $currentPassword;
+    public $newPassword;
+    public $newPasswordConfirm;
     /**
      * {@inheritdoc}
      */
@@ -29,12 +32,17 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            // [['username', 'password', 'auth_key', 'acess_token',], 'required'],
-            [['username', 'password', ], 'required'],
+            [['username',  ], 'required'],
             [['username', 'password', 'auth_key', 'acess_token',], 'string'],
+            [['newPassword','newPasswordConfirm'],'required'],
+            [['newPassword','newPasswordConfirm'],'string'],
+            [['newPassword','newPasswordConfirm'],'filter','filter'=>'trim'],
+            [['newPasswordConfirm'],'compare','compareAttribute'=>'newPassword', 'message'=> 'password do not match'],
         ];
     }
+  
 
+  
     /**
      * {@inheritdoc}
      */

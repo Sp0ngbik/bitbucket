@@ -15,6 +15,7 @@ use Yii;
  */
 class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    
     /**
      * {@inheritdoc}
      */
@@ -29,8 +30,9 @@ class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username',  ], 'required'],
+            [['username', ], 'required'],
             [['password', 'auth_key', 'acess_token'], 'string'],
+            
         ];
     }
 
@@ -42,7 +44,6 @@ class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'username' => 'Name',
             'password' => 'Password',
-           
         ];
     }
     
