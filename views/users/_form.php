@@ -18,7 +18,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'username')->textarea(['rows' => 6]) ?>
     <?= $form->field($model, 'password')->textarea(['rows' => 1]) ?>
-    <?= $form->field($model, 'submit_password')->textarea(['rows' => 1]) ?>
       <?= $form->field($model, 'acess_token')->textarea(['rows' => 1]) ?>
     <?= $form->field($model, 'auth_key')->textarea(['rows' => 1]) ?>  
     <div class="form-group">

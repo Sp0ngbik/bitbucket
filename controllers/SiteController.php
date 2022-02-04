@@ -139,7 +139,8 @@ class SiteController extends Controller
             $model->acess_token = password_hash(random_bytes(10),PASSWORD_DEFAULT);
             if($model->save()){
                 
-                 header('Location:http://localhost:8080/site/login');
+                return $this->redirect(['login', 'id' => $model->id, ]);
+                //  header('Location:http://localhost:8080/site/login');
                 die();
             }
         }

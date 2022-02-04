@@ -87,23 +87,27 @@ class UsersController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
+   
     public function actionCreate()
     {
         $model = new Users();
-
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['index', 'id' => $model->id, ]);
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate()) {
+                    // form inputs are valid, do something here
+                    $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
+                    if($model->save()){
+                        return $this->redirect(['index', 'id' => $model->id, ]);
+                        die();
+                    }
+                }
             }
-        } else {
-        $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        } 
+        
+     return $this->render('create', [
+    'model' => $model,
+     ]);
     }
-
     /**
      * Updates an existing Users model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -114,11 +118,15 @@ class UsersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        // $model->password=$hash = Yii::$app->getSecurity()->generatePasswordHash($model->password);
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
-            // return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                // form inputs are valid, do something here
+                $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
+                if($model->save()){
+                    return $this->redirect(['index', 'id' => $model->id, ]);
+                    die();
+                }
+            }
         }
         return $this->render('update', [    
             'model' => $model,

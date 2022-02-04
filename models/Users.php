@@ -31,7 +31,7 @@ class Users extends \yii\db\ActiveRecord
         return [
             // [['username', 'password', 'auth_key', 'acess_token',], 'required'],
             [['username', 'password', 'auth_key', 'acess_token',], 'required'],
-            [['username', 'password', 'auth_key', 'acess_token','submit_password'], 'string'],
+            [['username', 'password', 'auth_key', 'acess_token',], 'string'],
         ];
     }
 
@@ -46,7 +46,6 @@ class Users extends \yii\db\ActiveRecord
             'username' => 'Username',
             'password' => 'Password',
             'id' => 'ID',
-            'submit_password'=>"Submit password"
         ];
     }
 }
