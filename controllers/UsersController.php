@@ -120,7 +120,7 @@ class UsersController extends Controller
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
-                // form inputs are valid, do something here
+                // form inputs are valid, do something he
                 $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
                 if($model->save()){
                     return $this->redirect(['index', 'id' => $model->id, ]);
