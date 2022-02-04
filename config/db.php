@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=mysql;dbname=yii2basic',
+    'dsn' => 'mysql:host=locallhost;dbname=yii2basic',
     'username' => 'root',
-    'password' => 'root',
+    'password' => '',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
@@ -12,3 +12,15 @@ return [
     //'schemaCacheDuration' => 60,
     //'schemaCache' => 'cache',
 ];
+// return [
+//     'class' => 'yii\db\Connection',
+//     'dsn' => 'mysql:host=mysql;dbname=yii2basic',
+//     'username' => 'root',
+//     'password' => 'root',
+//     'charset' => 'utf8',
+
+//     // Schema cache options (for production environment)
+//     //'enableSchemaCache' => true,
+//     //'schemaCacheDuration' => 60,
+//     //'schemaCache' => 'cache',
+// ];
