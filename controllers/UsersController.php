@@ -35,16 +35,16 @@ class UsersController extends Controller
             ],
          [ 'access' => [
             'class' => AccessControl::class,
-            'only' => ['update', 'delete'],
+            'only' => ['update', 'delete','create'],
             'rules' => [
                 [
                     'allow' => false,
-                    'actions' => ['update','delete' ],
+                    'actions' => ['update','delete','create' ],
                     'roles' => ['?'],
                 ],
              [
                  'allow'=> true,
-                 'actions' => ['update','delete' ],
+                 'actions' => ['update','delete' ,'create'],
                  'roles' => ['@'], 
              ]
             ],
@@ -93,10 +93,10 @@ class UsersController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index', 'id' => $model->id, ]);
             }
         } else {
-            $model->loadDefaultValues();
+        $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -117,9 +117,10 @@ class UsersController extends Controller
 
         // $model->password=$hash = Yii::$app->getSecurity()->generatePasswordHash($model->password);
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
+            // return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->render('update', [
+        return $this->render('update', [    
             'model' => $model,
         ]);
     }

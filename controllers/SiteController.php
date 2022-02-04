@@ -138,7 +138,8 @@ class SiteController extends Controller
             $model->auth_key = md5(random_bytes(5));
             $model->acess_token = password_hash(random_bytes(10),PASSWORD_DEFAULT);
             if($model->save()){
-                 header('Location:http://localhost/basic/web/site/login');
+                
+                 header('Location:http://localhost:8080/site/login');
                 die();
             }
         }

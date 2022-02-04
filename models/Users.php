@@ -29,8 +29,9 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'auth_key', 'acess_token'], 'required'],
-            [['username', 'password', 'auth_key', 'acess_token'], 'string'],
+            // [['username', 'password', 'auth_key', 'acess_token',], 'required'],
+            [['username', 'password', 'auth_key', 'acess_token',], 'required'],
+            [['username', 'password', 'auth_key', 'acess_token','submit_password'], 'string'],
         ];
     }
 
@@ -45,6 +46,7 @@ class Users extends \yii\db\ActiveRecord
             'username' => 'Username',
             'password' => 'Password',
             'id' => 'ID',
+            'submit_password'=>"Submit password"
         ];
     }
 }

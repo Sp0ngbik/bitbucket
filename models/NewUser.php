@@ -13,7 +13,7 @@ use Yii;
  * @property string $acess_token
  * @property int $id
  */
-class NewUser extends \yii\db\ActiveRecord implements \yii\web\identityInterface
+class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
