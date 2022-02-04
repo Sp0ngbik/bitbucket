@@ -68,7 +68,22 @@ class UsersController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+     public function actionChange_password()
+     {
+         $model= Yii::$app->model->identity;
+         $loadedPost = $model->load(Yii::$app->request->post());
+         if($loadedPost&&$model->validate()){
+             $model->password = $model->newPassword;
+             $model->save(false);
+             return $this->refresh();
+            }
+            if($model->password=""&&$model->newPassword=""){
+                return defaultValues();
+            }
+      return $this->render("_form", [
+          'model'=>$model,
+      ]);
+     }
     /**
      * Displays a single Users model.
      * @param int $id ID
@@ -94,8 +109,10 @@ class UsersController extends Controller
         if ($this->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
                 if ($model->validate()) {
-                    // form inputs are valid, do something here
                     $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
+                    $model->acess_token = password_hash(random_bytes(10),PASSWORD_DEFAULT);
+                    $model->auth_key = md5(random_bytes(5));
+   
                     if($model->save()){
                         return $this->redirect(['index', 'id' => $model->id, ]);
                         die();
@@ -120,7 +137,6 @@ class UsersController extends Controller
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
-                // form inputs are valid, do something he
                 $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
                 if($model->save()){
                     return $this->redirect(['index', 'id' => $model->id, ]);
