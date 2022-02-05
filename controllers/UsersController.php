@@ -73,13 +73,11 @@ class UsersController extends Controller
          $model= Yii::$app->model->identity;
          $loadedPost = $model->load(Yii::$app->request->post());
          if($loadedPost&&$model->validate()){
-             $model->password = $model->newPassword;
+             $model->newPassword = $model->password;
              $model->save(false);
              return $this->refresh();
             }
-            if($model->password=""&&$model->newPassword=""){
-                return defaultValues();
-            }
+           
       return $this->render("_form", [
           'model'=>$model,
       ]);
