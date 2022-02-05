@@ -100,22 +100,6 @@ class UsersController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    // public function actionCreate()
-    // {
-    //     $model = new Users();
-
-    //     if ($this->request->isPost) {
-    //         if ($model->load($this->request->post()) && $model->save()) {
-    //             return $this->redirect(['view', 'id' => $model->id]);
-    //         }
-    //     } else {
-    //         $model->loadDefaultValues();
-    //     }
-
-    //     return $this->render('create', [
-    //         'model' => $model,
-    //     ]);
-    // }
   public function actionCreate()
     {
         $model = new Users();
@@ -145,18 +129,6 @@ class UsersController extends Controller
     //  * @return string|\yii\web\Response
     //  * @throws NotFoundHttpException if the model cannot be found
     //  */
-    // public function actionUpdate($id)
-    // {
-    //     $model = $this->findModel($id);
-
-    //     // $model->password=$hash = Yii::$app->getSecurity()->generatePasswordHash($model->password);
-    //     if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-    //         return $this->redirect(['view', 'id' => $model->id]);
-    //     }
-    //     return $this->render('update', [
-    //         'model' => $model,
-    //     ]);
-    // }
 
   
     /**
