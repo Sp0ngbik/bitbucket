@@ -15,10 +15,10 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
-    public $rememberMe = true;
+    public $rememberMe = false;
     public $verifyCode;
     private $_user = false;
-
+    
     /**
      * @return array the validation rules.
      */

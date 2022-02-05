@@ -15,7 +15,6 @@ use Yii;
  */
 class Users extends \yii\db\ActiveRecord
 {
-    public $currentPassword;
     public $newPassword;
     public $newPasswordConfirm;
     /**
@@ -36,8 +35,7 @@ class Users extends \yii\db\ActiveRecord
             [['username', 'password', 'auth_key', 'acess_token',], 'string'],
             [['newPassword','newPasswordConfirm'],'required'],
             [['newPassword','newPasswordConfirm'],'string'],
-            [['newPassword','newPasswordConfirm'],'filter','filter'=>'trim'],
-            [['newPasswordConfirm'],'compare','compareAttribute'=>'newPassword', 'message'=> 'password do not match'],
+            [['newPasswordConfirm'],'compare','compareAttribute'=>'newPassword', 'message'=> 'Password do not match'],
         ];
     }
   

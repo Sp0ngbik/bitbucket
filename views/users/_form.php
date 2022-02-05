@@ -29,4 +29,3 @@ use yii\widgets\Alert;
     
 
 </div>
-<!-- <?php $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password)?>   -->
