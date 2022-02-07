@@ -17,8 +17,8 @@ use yii\widgets\Alert;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username')->textarea(['rows' => 6]) ?>
-    <?= $form->field($model, 'newPassword')->textarea(['rows' => 1]) ?>
-    <?= $form->field($model, 'newPasswordConfirm')->textarea(['rows' => 1]) ?>
+    <?= $form->field($model, 'newPassword')->textarea(['rows' => 1])->label("Set new password") ?>
+    <?= $form->field($model, 'newPasswordConfirm')->textarea(['rows' => 1])->label("Confirm new password") ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success'])?>
