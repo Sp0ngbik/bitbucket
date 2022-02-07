@@ -34,7 +34,8 @@ class Users extends \yii\db\ActiveRecord
             [['username',  ], 'required'],
             [['username', 'password', 'auth_key', 'acess_token',], 'string'],
             [['newPassword','newPasswordConfirm'],'string'],
-            [['newPasswordConfirm'],'compare','compareAttribute'=>'newPassword', 'message'=> 'Password do not match'],
+            ['newPassword','compare','compareAttribute'=>'newPasswordConfirm','message'=> 'Password do not match'],
+            ['newPasswordConfirm','compare','compareAttribute'=>'newPassword', 'message'=> 'Password do not match'],
         ];
     }
   

@@ -141,10 +141,10 @@ class UsersController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function afterFind(){
-        $this->_old_password = $model->password;
-        parent::afterFind();
-    }
+    // public function afterFind(){
+    //     //$this->_old_password = $model->password;
+    //     parent::afterFind();
+    // }
   
     public function actionUpdate($id)
     {
@@ -152,7 +152,12 @@ class UsersController extends Controller
         if ($model->load(Yii::$app->request->post())) {
         
             if ($model->validate()) {
-                $model->newPassword == "" ?null:$model->password = Yii::$app->getSecurity()->generatePasswordHash($model->newPassword);
+                if(
+                    $model->newPassword !== ""
+                ){
+                    $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->newPassword);
+                }
+                //$model->newPassword == "" ?null:$model->password = Yii::$app->getSecurity()->generatePasswordHash($model->newPassword);
                 if($model->save()){
                     return $this->redirect(['index', 'id' => $model->id, ]);
                     die();
@@ -163,18 +168,18 @@ class UsersController extends Controller
             'model' => $model,
         ]);
     }
-    public function beforeSave(){
-        if(parent::beforeSave())
-        {
-            if($model->newPassword == null)
-            {
-                $model->password = $this->_old_password;
-            }   
-            return true;
-        }else{
-            return false;
-        }
-    }
+    // public function beforeSave(){
+    //     if(parent::beforeSave())
+    //     {
+    //         //if($model->newPassword == null)
+    //         //{
+    //         //    $model->password = $this->_old_password;
+    //         //}   
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
     /**
      * Deletes an existing Users model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
