@@ -34,10 +34,9 @@ class Users extends \yii\db\ActiveRecord
             [['username',  ], 'required'],
             [['username', 'password', 'auth_key', 'acess_token',], 'string'],
             [['newPassword','newPasswordConfirm'],'string'],
-            ['newPasswordConfirm','compare','compareAttribute'=>'newPassword', 'message'=> 'Password do not match'],
-            ['newPassword','compare','compareAttribute'=>'newPasswordConfirm','when'=>function(){
-                return $this->newPasswordConfirm == null;
-            }, 'message'=>''],
+            ['newPasswordConfirm','compare','compareAttribute'=>'newPassword','skipOnEmpty'=>false,
+             'message'=>'New password must be equal to confirm new password.'],
+            
         ];
     }
   
