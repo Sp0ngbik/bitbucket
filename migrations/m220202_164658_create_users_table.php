@@ -16,6 +16,7 @@ class m220202_164658_create_users_table extends Migration
             'id' => $this->primaryKey(),
             'username'=> $this->string(),
             'password'=> $this->string(),
+            'login_counter'=>$this->primaryKey(),
             'acess_token' => $this->string(),
             'auth_key' => $this->string(),
         ]);
