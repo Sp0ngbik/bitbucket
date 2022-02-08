@@ -18,7 +18,7 @@ class LoginForm extends Model
     public $rememberMe = false;
     public $verifyCode;
     private $_user = false;
-
+    public $login_counter;
     /**
      * @return array the validation rules.
      */
