@@ -78,8 +78,24 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
+        // if($model->login_counter>3){
+        //     $model->scenario = 'withCaptcha';
+        // }
+        // if(isset($_POST['LoginForm'])){
+        //     $model->attributes->$_POST['LoginForm'];
+        // }
 
+        // if($model->validate()&&$model->login()){
+        //     $model->load(Yii::$app()->user->setState('login_counter',0));
+        // }else{
+        //     $model->load(Yii::$app()->user->setState('login_counter',0));
+        //     if($model->login_counter>3){
+        //     $model->scenarion="withCaptcha";
+        //     }
+        // }
         $model->password = '';
+
+
         return $this->render('login', [
             'model' => $model,
         ]);
