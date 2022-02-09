@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Please filssl out the following fields to login:</p>
-
+<?php echo($model->login_counter)?>
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -27,25 +27,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
         ],
     ]); ?>
-
         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
         <?= $form->field( $model, 'password')->passwordInput()   ?>
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
-        <?php if($model->scenario == 'withCaptcha' && CCaptcha::chechRequirements()):?>
-        <div class='row'>
-            <?php echo $form->labelEx($model,'verifyCode');?>
-            <div>
-                <?php $this->widget('Captcha');?>
-                <?php echo $form->textField($model,'verifyCode');?>
+       <?php if ($model->scenario == 'withCaptcha'): ?>
+            <div class="row">
+                <?php echo $form->labelEx($model, 'verifyCode'); ?>
+                <div>
+                    <?php $this->widget('Captcha'); ?>
+                    <?php echo $form->textField($model, 'verifyCode'); ?>
+                </div>
+                <?php echo $form->error($model, 'verifyCode'); ?>
             </div>
-            <?php echo $form->error($model,'verifyCode');?>
-        </div>
-
-            <?php endif;?>
+        <?php endif; ?>
         
-     
+     <?php echo($model->login_counter)?>
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button'] ) ?>

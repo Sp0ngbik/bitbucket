@@ -78,7 +78,23 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-     
+       if(Yii::$app->request->get('login_counter')>3){
+           $model->scenario = 'withCaptcha';
+       }
+       if (isset($_POST['LoginForm'])) {
+        $model->attributes = $_POST['LoginForm'];
+         
+        if($model->validate()&&$model->login()){
+            Yii::$app->request->post('login_counter',0);
+        }else{
+           $model->login_counter = Yii::$app->request->post('login_counter',3);
+            if(Yii::$app->request->get('login_counter')>3){
+                $model->scenario='withCaptcha';
+            }
+        }
+    }
+
+
         $model->password = '';
 
 
@@ -137,6 +153,7 @@ class SiteController extends Controller
             $model->password = Yii::$app->getSecurity($_POST["NewUser"]["password"])->generatePasswordHash($model->password);
             $model->auth_key = md5(random_bytes(5));
             $model->acess_token = password_hash(random_bytes(10),PASSWORD_DEFAULT);
+            // $model->login_counter = md5(random_bytes(15));
             if($model->save()){
                 return $this->redirect(['login', 'id' => $model->id, ]);
                 die();

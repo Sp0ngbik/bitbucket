@@ -31,6 +31,7 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword',],
+            // ['login_counter','string'],
             //added captcha here for rules , from users
             ['verifyCode', 'captcha','on'=>'withCaptcha',],
         ];
