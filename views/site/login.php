@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Please filssl out the following fields to login:</p>
-<?php echo($model->login_counter)?>
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',
@@ -32,25 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
-       <?php if ($model->scenario == 'withCaptcha'): ?>
-            <div class="row">
-                <?php echo $form->labelEx($model, 'verifyCode'); ?>
+       <?php if ($model->login_counter == 3): ?>
+            <div class="column">
                 <div>
-                    <?php $this->widget('Captcha'); ?>
-                    <?php echo $form->textField($model, 'verifyCode'); ?>
-                </div>
-                <?php echo $form->error($model, 'verifyCode'); ?>
+                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                        'template' => '<span class="row"><span class="col-lg-5">{image}</span><span class="col-lg-12">{input}</span></span>',
+                    ]) ?>
             </div>
-        <?php endif; ?>
-        
-     <?php echo($model->login_counter)?>
-        <div class="form-group">
-            <div class="offset-lg-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button'] ) ?>
-
-            </div>
-
-        </div>
+            <?php endif; ?>
+            <div class="form-group">
+                <div class="offset-lg-1 col-lg-11">
+                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button'] ) ?>
+                    
+             </div>
+         </div>
        
 
                   
