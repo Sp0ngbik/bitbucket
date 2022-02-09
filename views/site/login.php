@@ -33,9 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
-        <?=  $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-12">{input}</div></div>',
-                    ]) ?>
+        <?php if($model->scenario == 'withCaptcha' && CCaptcha::chechRequirements()):?>
+        <div class='row'>
+            <?php echo $form->labelEx($model,'verifyCode');?>
+            <div>
+                <?php $this->widget('Captcha');?>
+                <?php echo $form->textField($model,'verifyCode');?>
+            </div>
+            <?php echo $form->error($model,'verifyCode');?>
+        </div>
+
+            <?php endif;?>
+        
      
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">

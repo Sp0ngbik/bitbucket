@@ -78,21 +78,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-        // if($model->login_counter>3){
-        //     $model->scenario = 'withCaptcha';
-        // }
-        // if(isset($_POST['LoginForm'])){
-        //     $model->attributes->$_POST['LoginForm'];
-        // }
-
-        // if($model->validate()&&$model->login()){
-        //     $model->load(Yii::$app()->user->setState('login_counter',0));
-        // }else{
-        //     $model->load(Yii::$app()->user->setState('login_counter',0));
-        //     if($model->login_counter>3){
-        //     $model->scenarion="withCaptcha";
-        //     }
-        // }
+     
         $model->password = '';
 
 
@@ -100,7 +86,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-
+  //First of all, Yii::app()->user->setState() is from Yii1, and Yii::$app->request->cookies is from Yii2.
     /**
      * Logout action.
      *

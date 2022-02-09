@@ -11,6 +11,7 @@ use Yii;
  * @property string $password
  * @property string $auth_key
  * @property string $acess_token
+ * @property string $login_counter
  * @property int $id
  */
 class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
@@ -31,7 +32,7 @@ class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username', ], 'required'],
-            [['password', 'auth_key', 'acess_token'], 'string'],
+            [['password', 'auth_key', 'acess_token','login_counter',], 'string'],
             
         ];
     }
@@ -67,7 +68,7 @@ class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function getAuthKey(){
         return $this->auth_key;
     }
-
+ 
     public function validateAuthKey($auth_key){
         return $this->auth_key === $auth_key;
     }
