@@ -154,7 +154,6 @@ class UsersController extends Controller
                 ){
                     $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->newPassword);
                 }
-                //$model->newPassword == "" ?null:$model->password = Yii::$app->getSecurity()->generatePasswordHash($model->newPassword);
                 if($model->save()){
                     return $this->redirect(['index', 'id' => $model->id, ]);
                     die();
