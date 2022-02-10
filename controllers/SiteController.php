@@ -87,8 +87,8 @@ class SiteController extends Controller
         if($model->validate()&&$model->login()){
             Yii::$app->request->post('login_counter',0);
         }else{
-            $connection = Yii::$app->db;
-            $connection->createCommand()->update('login_counter',['status'=>1])->execute();
+            $model->login_counter=Yii::$app->request->post('login_counter',Yii::$app->request->get('login_counter',0)+3);
+            // $model->login_counter=Yii::$app->db->createCommand()->update('login_counter',['status'=>1],'id'>1)->execute();
         }
     }
 
