@@ -75,41 +75,12 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        $db = NewUser::findOne(1);
       
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-            
         }
-        //   $model->login()?$db->login_counter = 4:$db->login_counter = 0;
-        //       $db->save();
-          
-    
-    //     if($model->login()){
-    //         $db->updateCounters(['login_counter'=>-1]);
-    //         $db->save();
+     
  
-    //      }
-    //   else{
-    //          $db->updateCounters(['login_counter'=>1]);
-    //          $db->save();
-            
-    //         // $model->login_counter=Yii::$app->request->post('login_counter',Yii::$app->request->get('login_counter',0)+3);
-    //         // $model->login_counter=Yii::$app->db->createCommand()->update('login_counter',['status'=>1],'id'>1)->execute();
-    //       }
-    //    if(Yii::$app->request->get('login_counter')>3){
-    //        $model->scenario = 'withCaptcha';
-    //    }
-    //    if (isset($_POST['LoginForm'])) {
-    //     $model->attributes = $_POST['LoginForm'];
-         
-    //     if($model->validate()&&$model->login()){
-    //         Yii::$app->request->post('login_counter',0);
-    //     }else{
-    //         $model->login_counter=Yii::$app->request->post('login_counter',Yii::$app->request->get('login_counter',0)+3);
-    //         // $model->login_counter=Yii::$app->db->createCommand()->update('login_counter',['status'=>1],'id'>1)->execute();
-    //     }
-    // }
   
 
         $model->password = '';
