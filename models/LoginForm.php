@@ -66,22 +66,6 @@ class LoginForm extends Model
                 $this->scenario = 'withCaptcha';
             }
         }
-        // if()
-        // if($this->username != $db){
-        //     $this->addError($attribute,'no username match');
-        // }else if(
-        //     !$user || !$user->validatePassword($this->password)
-        // ){
-        //     $this->addError($attribute,'Incorrect username or password.');
-        //     $db->login_counter = $db->login_counter +1 ;
-        //     $db->update();
-        // }else{
-        //     $db->login_counter = 0;
-        //     $db->update();
-        // }
-        // if($db->login_counter >= 3){
-        //     $this->scenario = 'withCaptcha';
-        // }
     }
 
     /**
