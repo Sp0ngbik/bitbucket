@@ -49,18 +49,39 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             $db= NewUser::findByUsername($this->username);
+         
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
-                $db->login_counter = $db->login_counter +1;
-                $db->update();
+                if(!$user){
+                    $this->addError($attribute,'No user found');
+                }else {
+                    $db->login_counter = $db->login_counter +1;
+                    $db->update();
+                    $this->addError($attribute, 'Incorrect username or password.');            
+                }
             }else{
                 $db->login_counter=0;
                 $db->update();
             }
-            if($db->login_counter >= 3){
+            if(!$user || $db->login_counter >= 3){
                 $this->scenario = 'withCaptcha';
             }
         }
+        // if()
+        // if($this->username != $db){
+        //     $this->addError($attribute,'no username match');
+        // }else if(
+        //     !$user || !$user->validatePassword($this->password)
+        // ){
+        //     $this->addError($attribute,'Incorrect username or password.');
+        //     $db->login_counter = $db->login_counter +1 ;
+        //     $db->update();
+        // }else{
+        //     $db->login_counter = 0;
+        //     $db->update();
+        // }
+        // if($db->login_counter >= 3){
+        //     $this->scenario = 'withCaptcha';
+        // }
     }
 
     /**
