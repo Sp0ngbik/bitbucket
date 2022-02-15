@@ -63,9 +63,7 @@ class LoginForm extends Model
                 $db->login_counter=0;
                 $db->update();
             }
-            if(!$user || $db->login_counter >= 3){
-                $this->scenario = 'withCaptcha';
-            }
+        
         }
     }
 
@@ -79,13 +77,18 @@ class LoginForm extends Model
         $db= NewUser::findByUsername($this->username);
        
         if ($this->validate()) {
-           if($db->login_counter >=3){
+           if($db->login_counter >=3 ){
                $this->scenario = 'withCaptcha';
            }else{
 
                return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
            }
+        }else if($db->login_counter >=3 ){
+            $this->scenario = 'withCaptcha';
+
         }
+
+        
         return false;
     }
     /**
