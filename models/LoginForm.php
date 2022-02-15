@@ -34,6 +34,7 @@ class LoginForm extends Model
             // ['login_counter','string'],
             //added captcha here for rules , from users
             ['verifyCode', 'captcha','on'=>'withCaptcha',],
+           
         ];
     }
 
@@ -74,9 +75,15 @@ class LoginForm extends Model
      */
     public function login()
     {
-
+        $db= NewUser::findByUsername($this->username);
+       
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+           if($db->login_counter >=3){
+               $this->scenario = 'withCaptcha';
+           }else{
+
+               return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+           }
         }
         return false;
     }
