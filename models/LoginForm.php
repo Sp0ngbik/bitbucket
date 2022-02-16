@@ -19,6 +19,7 @@ class LoginForm extends Model
     public $verifyCode;
     private $_user = false;
     public $login_counter;
+    public $currentUser;
     public $usernameSend;
     public $valueToSend;
     /**
@@ -30,6 +31,8 @@ class LoginForm extends Model
             // username and password are both required
             [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
+            [['currentUser','usernameSend'],'string'],
+            ['valueToSend','integer'],
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword',],
@@ -93,6 +96,7 @@ class LoginForm extends Model
         
         return false;
     }
+   
     /**
      * Finds user by [[username]]
      *

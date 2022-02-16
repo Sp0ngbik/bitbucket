@@ -45,16 +45,13 @@ class Users extends \yii\db\ActiveRecord
         ];
     }
   //Из контроллера мы передаем модель а уже в модели мы работаем
-   public function transferByUsername(){
-       $model->balance = 50;
-       $model->update();
-       }
+ 
    
   
     /**
      * {@inheritdoc}
      */
-
+  
     public static function findByUsername($username){
         return self::findOne(['username'=>$username]);
 

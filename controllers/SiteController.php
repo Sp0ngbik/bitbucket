@@ -59,26 +59,28 @@ class SiteController extends Controller
      * Displays homepage.
      *
      * @return string
-     * 
-     *
      */
-
+    //Суть в том что при открытии трансфера он его сразу рендерит
+    //поиграться с нью юзер
         public function actionTransfer(){
-            $model = new Users();
-             $currentUsername = Users::findByUsername($model->currentUser);
-             $userSend = Users::findByUsername($model->usernameSend);
-            
-          if($currentUsername||$userSend){
-              $currentUsername->balance = 5;
-              $currentUsername->update();
+            $model = new LoginForm();
+            if($model->load(Yii::$app->request->post())){
 
-          }
-            
-        
+                $currentUsername = NewUser::findByUsername($model->currentUser);
+                $userSend = NewUser::findByUsername($model->usernameSend);
+                if($model){
+                    // $userSend = Users::findByUsername($model->usernameSend);
+                    // $currentUsername = Users::findByUsername($model->currentUser);
+                    $currentUsername->balance = 552;
+                    $currentUsername->update();
+                }else{
+                    $model->usernameSend = "aspdkaspdp";
+                }
+            }
+
             return $this->render('transfer',['model'=>$model]);
             
             }
-
     public function actionIndex()
     {
         return $this->render('index');
