@@ -17,6 +17,9 @@ class Users extends \yii\db\ActiveRecord
 {
     public $newPassword;
     public $newPasswordConfirm;
+    public $username;
+    public $usernameSend;
+    public $valueToSend;
     /**
      * {@inheritdoc}
      */
@@ -31,7 +34,7 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username',  ], 'required'],
+            [['username', 'usernameSend','valueToSend' ], 'required'],
             [['username', 'password', 'auth_key', 'acess_token',], 'string'],
             [['newPassword','newPasswordConfirm'],'string'],
             ['newPasswordConfirm','compare','compareAttribute'=>'newPassword','skipOnEmpty'=>false,
@@ -39,8 +42,12 @@ class Users extends \yii\db\ActiveRecord
             
         ];
     }
-  
-
+  //Из контроллера мы передаем модель а уже в модели мы работаем
+   public function transferByUsername(){
+       $model->balance = 50;
+       $model->update();
+       }
+   
   
     /**
      * {@inheritdoc}
