@@ -38,10 +38,11 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
+
         ['label' => 'Transfer', 'url' => ['/site/transfer']],
         ['label' => 'Users', 'url' =>   ['/users']
+
         
-        // ['label' => 'Users', 'url' => [Yii::$app->user->isGuest ?null:  '/users'
     ],
     ];
        if( Yii::$app->user->isGuest){

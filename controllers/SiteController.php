@@ -59,7 +59,10 @@ class SiteController extends Controller
      * Displays homepage.
      *
      * @return string
+     * 
+     *
      */
+
         public function actionTransfer(){
             $model = new Users();
              $currentUsername = Users::findByUsername($model->currentUser);
@@ -75,6 +78,7 @@ class SiteController extends Controller
             return $this->render('transfer',['model'=>$model]);
             
             }
+
     public function actionIndex()
     {
         return $this->render('index');
