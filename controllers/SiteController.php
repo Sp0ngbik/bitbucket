@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\NewUser;
+use app\models\Users;
 
 class SiteController extends Controller
 {
@@ -62,10 +63,22 @@ class SiteController extends Controller
      *
      */
 
-     public function actionTransfer(){
-         $db = new LoginForm();
-         return $this->render('transfer',['db'=>$db]);
-     }
+        public function actionTransfer(){
+            $model = new Users();
+             $currentUsername = Users::findByUsername($model->currentUser);
+             $userSend = Users::findByUsername($model->usernameSend);
+            
+          if($currentUsername||$userSend){
+              $currentUsername->balance = 5;
+              $currentUsername->update();
+
+          }
+            
+        
+            return $this->render('transfer',['model'=>$model]);
+            
+            }
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -147,9 +160,7 @@ class SiteController extends Controller
             $model->password = Yii::$app->getSecurity($_POST["NewUser"]["password"])->generatePasswordHash($model->password);
             $model->auth_key = md5(random_bytes(5));
             $model->acess_token = password_hash(random_bytes(10),PASSWORD_DEFAULT);
-            // $model->login_counter = Yii::$app->request->post('login_counter',Yii::$app->request->get('login_counter',1)+1);
-
-            // $model->login_counter = md5(random_bytes(15));
+ 
             if($model->save()){
                 return $this->redirect(['login', 'id' => $model->id, ]);
                 die();

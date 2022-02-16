@@ -17,7 +17,7 @@ class Users extends \yii\db\ActiveRecord
 {
     public $newPassword;
     public $newPasswordConfirm;
-    public $username;
+    public $currentUser;
     public $usernameSend;
     public $valueToSend;
     /**
@@ -37,6 +37,8 @@ class Users extends \yii\db\ActiveRecord
             [['username', 'usernameSend','valueToSend' ], 'required'],
             [['username', 'password', 'auth_key', 'acess_token',], 'string'],
             [['newPassword','newPasswordConfirm'],'string'],
+            [['currentUser','usernameSend'],'string'],
+            ['valueToSend','integer'],
             ['newPasswordConfirm','compare','compareAttribute'=>'newPassword','skipOnEmpty'=>false,
              'message'=>'New password must be equal to confirm new password.'],
             
@@ -53,7 +55,10 @@ class Users extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
 
-  
+    public static function findByUsername($username){
+        return self::findOne(['username'=>$username]);
+
+    }
     public function attributeLabels()
     {
         return [

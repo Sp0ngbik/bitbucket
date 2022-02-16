@@ -85,7 +85,7 @@ class LoginForm extends Model
 
                return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
            }
-        }else if($db->login_counter >=3 ){
+        }else if(!$this->getUser() ){
             $this->scenario = 'withCaptcha';
 
         }
