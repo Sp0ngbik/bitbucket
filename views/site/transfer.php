@@ -5,9 +5,9 @@ use yii\widgets\ActiveForm;
 
 <div class="site-login">
 <?php $form = ActiveForm::begin();?>
-    <?= $form->field($model, 'username')?>
-    <?= $form->field($model, 'usernameSend')?>
-    <?= $form->field($model, 'valueToSend')?>
+    <?= $form->field($db, 'username')?>
+    <?= $form->field($db, 'usernameSend')?>
+    <?= $form->field($db, 'valueToSend')?>
     <div class='form-group'>
         <?= Html::submitButton('Save',['class'=>'btn btn-success'])?>
     </div>

@@ -58,7 +58,14 @@ class SiteController extends Controller
      * Displays homepage.
      *
      * @return string
+     * 
+     *
      */
+
+     public function actionTransfer(){
+         $db = new LoginForm();
+         return $this->render('transfer',['db'=>$db]);
+     }
     public function actionIndex()
     {
         return $this->render('index');
