@@ -64,20 +64,28 @@ class SiteController extends Controller
     //поиграться с нью юзер
         public function actionTransfer(){
             $model = new LoginForm();
+            $model->scenario = 'fieldsUsername';
             if($model->load(Yii::$app->request->post())){
-
                 $currentUsername = NewUser::findByUsername($model->currentUser);
                 $userSend = NewUser::findByUsername($model->usernameSend);
-                if($model){
-                    // $userSend = Users::findByUsername($model->usernameSend);
-                    // $currentUsername = Users::findByUsername($model->currentUser);
-                    $currentUsername->balance = 552;
+                if($model->valueToSend > $currentUsername->balance){
+                    $model->addError('valueToSend','Not enough balance'); 
+                }else if($currentUsername==$userSend){
+                    $model->addError('usernameSend','You cant transfer balance to yourself');
+                }else if($model->valueToSend<=-1){
+                   $model->addError('valueToSend','You cant transfer negative or null balance');
+                }else if(
+                    $model||!$this->hasErrors()
+                ){  
+                    $currentUsername->balance -=  $model->valueToSend;
                     $currentUsername->update();
-                }else{
-                    $model->usernameSend = "aspdkaspdp";
+                    $userSend->balance +=  $model->valueToSend;
+                    $userSend->update();
+                    return $this->refresh();
+                    $this->addError($model, 'Incorrect username or password.'); 
                 }
+                
             }
-
             return $this->render('transfer',['model'=>$model]);
             
             }

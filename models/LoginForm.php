@@ -31,12 +31,11 @@ class LoginForm extends Model
             // username and password are both required
             [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
-            [['currentUser','usernameSend'],'string'],
+            [['currentUser','usernameSend'],'required','on'=>'fieldsUsername'],
             ['valueToSend','integer'],
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword',],
-            // ['login_counter','string'],
             //added captcha here for rules , from users
             ['verifyCode', 'captcha','on'=>'withCaptcha',],
            

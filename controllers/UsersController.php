@@ -60,11 +60,6 @@ class UsersController extends Controller
      * @return string
      */
 
-     public function actionTransfer (){
-         $model= new UsersSearch();
-       
-         return $this->render ('transfer', ['model'=>$model]);
-     } 
     public function actionIndex()
     {
         $searchModel = new UsersSearch();
