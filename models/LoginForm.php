@@ -57,7 +57,7 @@ class LoginForm extends Model
          
             if (!$user || !$user->validatePassword($this->password)) {
                 if(!$user){
-                    $this->addError($attribute,'No user found');
+                    $this->addError($attribute,'Incorrect username or password.');
                 }else {
                     $db->login_counter = $db->login_counter +1;
                     $db->update();

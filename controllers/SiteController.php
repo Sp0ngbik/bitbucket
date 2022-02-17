@@ -64,14 +64,15 @@ class SiteController extends Controller
     //поиграться с нью юзер
         public function actionTransfer(){
             $model = new LoginForm();
-         
+            $user = new NewUser;
             $model->scenario = 'fieldsUsername';
             if($model->load(Yii::$app->request->post())){
                 $currentUsername = NewUser::findByUsername($model->currentUser);
                 $userSend = NewUser::findByUsername($model->usernameSend);
                 if(!$currentUsername){
                     $model->addError('currentUser','No username found');
-                } else if(!$userSend){
+                } else if(password_verify($model->password,$currentUsername->password)){
+                     if(!$userSend){
                     $model->addError('usernameSend','No username found');
                 }  else if($model->valueToSend > $currentUsername->balance){
                     $model->addError('valueToSend','Not enough balance'); 
@@ -87,7 +88,8 @@ class SiteController extends Controller
                     $userSend->balance +=  $model->valueToSend;
                     $userSend->update();
                     return $this->refresh();
-                    $this->addError($model, 'Incorrect username or password.'); 
+                }}else{
+                    $model->addError('password','Incorrect password');
                 }
               
                 
