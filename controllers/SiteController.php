@@ -22,16 +22,19 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['login', 'logout', 'signup',],
+                'only' => ['login', 'logout', 'signup','transfer'],
                 'rules' => [
                     [
                         'allow' => true,
                         'actions' => ['login', 'signup',],
                         'roles' => ['?'],
                     ],
+                    ['allow'=>false,
+                'actions'=>['transfer'],
+            'roles'=>['?']],
                     [
                         'allow' => true,
-                        'actions' => ['logout','create','update'],
+                        'actions' => ['logout','create','update','transfer'],
                         'roles' => ['@'],
                     ],
                 ],
