@@ -11,7 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\NewUser;
 use app\models\Users;
-
+use app\models\TransferForm;
 class SiteController extends Controller
 {
     /**
@@ -63,7 +63,7 @@ class SiteController extends Controller
     //Суть в том что при открытии трансфера он его сразу рендерит
     //поиграться с нью юзер
         public function actionTransfer(){
-            $model = new LoginForm();
+            $model = new TransferForm;
             $user = new NewUser;
             $model->scenario = 'fieldsUsername';
             if($model->load(Yii::$app->request->post())){
@@ -173,7 +173,6 @@ class SiteController extends Controller
 
     if ($model->load(Yii::$app->request->post())) {
         if ($model->validate()) {
-            // form inputs are valid, do something here
             $model->username = $_POST['NewUser']['username'];
             $model->password = Yii::$app->getSecurity($_POST["NewUser"]["password"])->generatePasswordHash($model->password);
             $model->auth_key = md5(random_bytes(5));
