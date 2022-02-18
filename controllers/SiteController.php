@@ -12,7 +12,6 @@ use app\models\ContactForm;
 use app\models\NewUser;
 use app\models\TransferForm;
 use app\models\Users;
-use app\models\TransferForm;
 class SiteController extends Controller
 {
     /**
