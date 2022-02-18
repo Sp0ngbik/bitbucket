@@ -12,7 +12,7 @@ use app\models\ContactForm;
 use app\models\NewUser;
 use app\models\TransferForm;
 use app\models\Users;
-
+use app\models\TransferForm;
 class SiteController extends Controller
 {
     /**
@@ -67,9 +67,36 @@ class SiteController extends Controller
    
         public function actionTransfer(){
             $model = new TransferForm;
-            $model->trasferValidation();
-            if($model->validate()){
-                return $this->refresh();
+            $user = new NewUser;
+            $model->scenario = 'fieldsUsername';
+            if($model->load(Yii::$app->request->post())){
+                $currentUsername = NewUser::findByUsername($model->currentUser);
+                $userSend = NewUser::findByUsername($model->usernameSend);
+                if(!$currentUsername){
+                    $model->addError('currentUser','No username found');
+                } else if(password_verify($model->password,$currentUsername->password)){
+                     if(!$userSend){
+                    $model->addError('usernameSend','No username found');
+                }  else if($model->valueToSend > $currentUsername->balance){
+                    $model->addError('valueToSend','Not enough balance'); 
+                }else if($currentUsername==$userSend){
+                    $model->addError('usernameSend','You cant transfer balance to yourself');
+                }else if($model->valueToSend<=-1){
+                   $model->addError('valueToSend','You cant transfer negative or null balance');
+                }else if(
+                    $model||!$this->hasErrors()
+                ){  
+                    $currentUsername->balance -=  $model->valueToSend;
+                    $currentUsername->update();
+                    $userSend->balance +=  $model->valueToSend;
+                    $userSend->update();
+                    return $this->refresh();
+                }}else{
+                    $model->addError('password','Incorrect password');
+                }
+              
+                
+
             }
             return $this->render('transfer',['model'=>$model]);
             }
@@ -150,7 +177,6 @@ class SiteController extends Controller
 
     if ($model->load(Yii::$app->request->post())) {
         if ($model->validate()) {
-            // form inputs are valid, do something here
             $model->username = $_POST['NewUser']['username'];
             $model->password = Yii::$app->getSecurity($_POST["NewUser"]["password"])->generatePasswordHash($model->password);
             $model->auth_key = md5(random_bytes(5));

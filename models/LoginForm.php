@@ -19,7 +19,7 @@ class LoginForm extends Model
     public $verifyCode;
     private $_user = false;
     public $login_counter;
- 
+
     /**
      * @return array the validation rules.
      */
