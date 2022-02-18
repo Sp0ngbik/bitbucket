@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\NewUser;
+use app\models\TransferForm;
 use app\models\Users;
 
 class SiteController extends Controller
@@ -63,41 +64,22 @@ class SiteController extends Controller
      *
      * @return string
      */
- 
+   
         public function actionTransfer(){
-            $model = new LoginForm();
+            $model = new TransferForm;
             $user = new NewUser;
             $model->scenario = 'fieldsUsername';
+            $model->trasferValidation();
+        
             if($model->load(Yii::$app->request->post())){
-                $currentUsername = NewUser::findByUsername($model->currentUser);
-                $userSend = NewUser::findByUsername($model->usernameSend);
-                if(!$currentUsername){
-                    $model->addError('currentUser','No username found');
-                } else if(password_verify($model->password,$currentUsername->password)){
-                     if(!$userSend){
-                    $model->addError('usernameSend','No username found');
-                }  else if($model->valueToSend > $currentUsername->balance){
-                    $model->addError('valueToSend','Not enough balance'); 
-                }else if($currentUsername==$userSend){
-                    $model->addError('usernameSend','You cant transfer balance to yourself');
-                }else if($model->valueToSend<=-1){
-                   $model->addError('valueToSend','You cant transfer negative or null balance');
-                }else if(
-                    $model||!$this->hasErrors()
-                ){  
-                    $currentUsername->balance -=  $model->valueToSend;
-                    $currentUsername->update();
-                    $userSend->balance +=  $model->valueToSend;
-                    $userSend->update();
+                if($model->validate()){
                     return $this->refresh();
-                }}else{
-                    $model->addError('password','Incorrect password');
-                }
-              
-                
+
+        }
             }
             return $this->render('transfer',['model'=>$model]);
             }
+            
     public function actionIndex()
     {
         return $this->render('index');

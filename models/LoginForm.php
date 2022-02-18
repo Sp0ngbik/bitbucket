@@ -19,9 +19,7 @@ class LoginForm extends Model
     public $verifyCode;
     private $_user = false;
     public $login_counter;
-    public $currentUser;
-    public $usernameSend;
-    public $valueToSend;
+ 
     /**
      * @return array the validation rules.
      */
@@ -31,8 +29,6 @@ class LoginForm extends Model
             // username and password are both required
             [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
-            [['currentUser','usernameSend'],'required','on'=>'fieldsUsername'],
-            ['valueToSend','integer'],
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword',],
