@@ -61,7 +61,9 @@ class LoginForm extends Model
                 }else {
                     $db->login_counter = $db->login_counter +1;
                     $db->update();
-                    $this->addError($attribute, 'Incorrect username or password.');            
+                    $this->addError($attribute, 'Incorrect username or password.');    
+                    
+                    }        
                 }
             }else{
                 $db->login_counter=0;

@@ -63,8 +63,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    //Суть в том что при открытии трансфера он его сразу рендерит
-    //поиграться с нью юзер
+ 
         public function actionTransfer(){
             $model = new LoginForm();
             $user = new NewUser;
@@ -98,7 +97,6 @@ class SiteController extends Controller
                 
             }
             return $this->render('transfer',['model'=>$model]);
-            
             }
     public function actionIndex()
     {

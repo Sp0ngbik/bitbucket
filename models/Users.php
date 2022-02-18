@@ -44,7 +44,7 @@ class Users extends \yii\db\ActiveRecord
             
         ];
     }
-  //Из контроллера мы передаем модель а уже в модели мы работаем
+  
  
    
   
@@ -52,10 +52,7 @@ class Users extends \yii\db\ActiveRecord
      * {@inheritdoc}
      */
   
-    public static function findByUsername($username){
-        return self::findOne(['username'=>$username]);
-
-    }
+  
     public function attributeLabels()
     {
         return [
