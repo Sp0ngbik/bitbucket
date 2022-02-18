@@ -62,8 +62,9 @@ class LoginForm extends Model
                     $db->login_counter = $db->login_counter +1;
                     $db->update();
                     $this->addError($attribute, 'Incorrect username or password.');    
-                    
-                    }        
+                        if($db->login_counter >=3){
+                            $this->scenario = 'withCaptcha';
+                        }
                 }
             }else{
                 $db->login_counter=0;
