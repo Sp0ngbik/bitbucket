@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
+
 class TransferForm extends Model
 {
     public $currentUser;
@@ -12,6 +13,7 @@ class TransferForm extends Model
     public $valueToSend;
     public $password;
     
+
 
 
     public function rules(){
@@ -22,3 +24,4 @@ class TransferForm extends Model
         ];
     }
 }
+

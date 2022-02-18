@@ -9,12 +9,10 @@ use yii\widgets\ActiveForm;
             'inputOptions' => ['class' => 'col-lg-3 form-control'],
         ],]);?>
 
-    <?= $form->field($model, 'currentUser')->textInput()?>
-    <?= $form->field($model, 'usernameSend')->textInput()?>
-    <?= $form->field($model, 'valueToSend')?>
-    <?php if($model->scenario == 'fieldsUsername'):?>
-    <?= $form->field( $model, 'password')->passwordInput()   ?>
-    <?php endif; ?> 
+    <?= $form->field($model, 'currentUser')->textInput()->label('Username who will send')?>
+    <?= $form->field($model, 'usernameSend')->textInput()->label('Username who will recive')?>
+    <?= $form->field($model, 'valueToSend')->label('Value to send')?>
+    <?= $form->field( $model, 'password')->passwordInput()->label('Password of sender username')?>
     <div class='form-group'>
         <?= Html::submitButton('Submit',['class'=>'btn btn-success'])?>
     </div>

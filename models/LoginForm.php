@@ -29,7 +29,6 @@ class LoginForm extends Model
             // username and password are both required
             [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
-           
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword',],
@@ -58,7 +57,10 @@ class LoginForm extends Model
                 }else {
                     $db->login_counter = $db->login_counter +1;
                     $db->update();
-                    $this->addError($attribute, 'Incorrect username or password.');            
+                    $this->addError($attribute, 'Incorrect username or password.');    
+                        if($db->login_counter >=3){
+                            $this->scenario = 'withCaptcha';
+                        }
                 }
             }else{
                 $db->login_counter=0;

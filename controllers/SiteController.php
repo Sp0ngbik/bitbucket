@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\NewUser;
+use app\models\TransferForm;
 use app\models\Users;
 use app\models\TransferForm;
 class SiteController extends Controller
@@ -22,16 +23,19 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['login', 'logout', 'signup',],
+                'only' => ['login', 'logout', 'signup','transfer'],
                 'rules' => [
                     [
                         'allow' => true,
                         'actions' => ['login', 'signup',],
                         'roles' => ['?'],
                     ],
+                    ['allow'=>false,
+                'actions'=>['transfer'],
+            'roles'=>['?']],
                     [
                         'allow' => true,
-                        'actions' => ['logout','create','update'],
+                        'actions' => ['logout','create','update','transfer'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -60,8 +64,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    //Суть в том что при открытии трансфера он его сразу рендерит
-    //поиграться с нью юзер
+   
         public function actionTransfer(){
             $model = new TransferForm;
             $user = new NewUser;
@@ -93,10 +96,11 @@ class SiteController extends Controller
                 }
               
                 
+
             }
             return $this->render('transfer',['model'=>$model]);
-            
             }
+
     public function actionIndex()
     {
         return $this->render('index');
