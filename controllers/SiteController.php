@@ -66,7 +66,7 @@ class SiteController extends Controller
    
         public function actionTransfer(){
             $model = new TransferForm;
-            $user = new NewUser;
+            $user = new Users;
             $model->scenario = 'fieldsUsername';
             if($model->load(Yii::$app->request->post())){
                 $currentUsername = NewUser::findByUsername($model->currentUser);

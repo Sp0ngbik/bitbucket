@@ -34,11 +34,9 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'usernameSend','valueToSend' ], 'required'],
+            [['username',  ], 'required'],
             [['username', 'password', 'auth_key', 'acess_token',], 'string'],
             [['newPassword','newPasswordConfirm'],'string'],
-            [['currentUser','usernameSend'],'string'],
-            ['valueToSend','integer'],
             ['newPasswordConfirm','compare','compareAttribute'=>'newPassword','skipOnEmpty'=>false,
              'message'=>'New password must be equal to confirm new password.'],
             
