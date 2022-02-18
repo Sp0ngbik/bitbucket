@@ -16,10 +16,12 @@ class TransferForm extends Model
 public function rules(){
     return [
         [['currentUser','usernameSend','password'],'required','on'=>'fieldsUsername'],
-        ['valueToSend','integer'],
+        ['valueToSend','integer',],
+        ['valueToSend','required'],
     ];
 }
 public function trasferValidation (){
+    $user = new NewUser;
     $this->scenario = 'fieldsUsername';
     if($this->load(Yii::$app->request->post())){
         $currentUsername = NewUser::findByUsername($this->currentUser);

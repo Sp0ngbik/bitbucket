@@ -67,19 +67,13 @@ class SiteController extends Controller
    
         public function actionTransfer(){
             $model = new TransferForm;
-            $user = new NewUser;
-            $model->scenario = 'fieldsUsername';
             $model->trasferValidation();
-        
-            if($model->load(Yii::$app->request->post())){
-                if($model->validate()){
-                    return $this->refresh();
-
-        }
+            if($model->validate()){
+                return $this->refresh();
             }
             return $this->render('transfer',['model'=>$model]);
             }
-            
+
     public function actionIndex()
     {
         return $this->render('index');
