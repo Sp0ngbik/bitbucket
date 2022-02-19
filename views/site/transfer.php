@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\LoginForm;
 use app\models\NewUser;
+use app\models\Users;
 ?>
 
 <div class="site-login">
@@ -12,11 +12,12 @@ use app\models\NewUser;
             'inputOptions' => ['class' => 'col-lg-3 form-control'],
         ],]);?>
 
-<?= $form->field($model, 'currentUser')->dropDownList(
-    ArrayHelper::map(NewUser::find()->all(), 'id', 'username','balance',)
+
+    <?= $form->field($model, 'currentUser')->dropDownList(
+    ArrayHelper::map(NewUser::find()->all(), 'username', 'username','balance',)
     )->label('Username who will send') ?>
       <?= $form->field($model, 'usernameSend')->dropDownList(
-    ArrayHelper::map(NewUser::find()->all(), 'id', 'username','balance',)
+    ArrayHelper::map(NewUser::find()->all(), 'username', 'username','balance',)
      )->label('Username who will send') ?>
     <?= $form->field($model, 'valueToSend')->label('Value to send')?>
     <?= $form->field( $model, 'password')->passwordInput()->label('Password of sender username')?>
