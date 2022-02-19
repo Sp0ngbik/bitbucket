@@ -19,7 +19,7 @@ use app\models\NewUser;
       <?= $form->field($model, 'usernameSend')->dropDownList(
     ArrayHelper::map(NewUser::find()->all(), 'username', 'username','balance',)
 
-     )->label('Username that will recieve') ?>
+     )->label('Username who will recieve') ?>
     <?= $form->field($model, 'valueToSend')->label('Value to send')?>
     <?= $form->field( $model, 'password')->passwordInput()->label('Password of sender username')?>
     <div class='form-group'>
