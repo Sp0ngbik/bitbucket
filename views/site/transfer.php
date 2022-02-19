@@ -1,3 +1,4 @@
+
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -25,3 +26,4 @@ use app\models\NewUser;
     </div>
     <?php ActiveForm::end()?>
 </div>
+

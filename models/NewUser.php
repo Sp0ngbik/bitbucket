@@ -31,7 +31,7 @@ class NewUser extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username', ], 'required'],
-            [['password', 'auth_key', 'acess_token',], 'string'],
+            [['password', 'auth_key', 'acess_token','id'], 'string'],
             
         ];
     }
