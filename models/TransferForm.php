@@ -23,9 +23,9 @@ class TransferForm extends Model
         ['valueToSend','required'],
         ];
     }
-   public function transferValidation($user,$userWhoSend,$password){
+   public function transferValidation($user,$userWhoSend){
    if(
-       !password_verify($this->password,$password)
+       !password_verify($this->password,$user->password)
    ){
      $this->addError('password','Incorrect password');
     }else if($this->valueToSend > $user->balance){
