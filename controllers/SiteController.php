@@ -66,7 +66,7 @@ class SiteController extends Controller
    
         public function actionTransfer(){
             $model = new TransferForm;
-            $user = new Users;
+            $userForm = new Users;
             $model->scenario = 'fieldsUsername';
             if($model->load(Yii::$app->request->post())){
                 $currentUsername = NewUser::findByUsername($model->currentUser);
@@ -97,7 +97,7 @@ class SiteController extends Controller
                 
 
             }
-            return $this->render('transfer',['model'=>$model]);
+            return $this->render('transfer',['model'=>$model,'userForm'=>$userForm,]);
             }
 
     public function actionIndex()
