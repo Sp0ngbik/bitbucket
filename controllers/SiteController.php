@@ -71,28 +71,14 @@ class SiteController extends Controller
             if($model->load(Yii::$app->request->post())){
                 $currentUsername = NewUser::findByUsername($model->currentUser);
                 $userSend = NewUser::findByUsername($model->usernameSend);
-              if(password_verify($model->password,$currentUsername->password)){
-
-                if($model->valueToSend > $currentUsername->balance){
-                    $model->addError('valueToSend','Not enough balance'); 
-                }else if($currentUsername==$userSend){
-                    $model->addError('usernameSend','You cant transfer balance to yourself');
-                }else if($model->valueToSend<=-1){
-                   $model->addError('valueToSend','You cant transfer negative or null balance');
-                }else if(
-                    $model||!$this->hasErrors()
-                ){  
+                $userPassword = $currentUsername -> password;
+                if($model->transferValidation($currentUsername,$userSend,$userPassword)||!$model->hasErrors()){
                     $currentUsername->balance -=  $model->valueToSend;
                     $currentUsername->update();
                     $userSend->balance +=  $model->valueToSend;
                     $userSend->update();
                     return $this->refresh();
-                }}else{
-                    $model->addError('password','Incorrect password');
                 }
-              
-                
-
             }
             return $this->render('transfer',['model'=>$model,'userForm'=>$userForm,]);
             }

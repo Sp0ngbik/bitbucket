@@ -23,8 +23,18 @@ class TransferForm extends Model
         ['valueToSend','required'],
         ];
     }
-//    public function transferValidation(){
-
-//    }
+   public function transferValidation($user,$userWhoSend,$password){
+   if(
+       !password_verify($this->password,$password)
+   ){
+     $this->addError('password','Incorrect password');
+    }else if($this->valueToSend > $user->balance){
+        $this->addError('valueToSend','Not enough balance');;
+    }else if($user==$userWhoSend){
+        $this->addError('usernameSend','You cant transfer balance to yourself');
+    }else if($this->valueToSend<=-1){
+        $this->addError('valueToSend','You cant transfer negative or null balance');
+    }
+   }
 }
 
