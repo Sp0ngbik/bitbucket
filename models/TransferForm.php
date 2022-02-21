@@ -23,6 +23,8 @@ class TransferForm extends Model
         ['valueToSend','required'],
         ];
     }
+//    public function transferValidation(){
 
+//    }
 }
 
