@@ -20,6 +20,11 @@ class m220202_164658_create_users_table extends Migration
             'acess_token' => $this->string(),
             'auth_key' => $this->string(),
         ]);
+        $this->createTable('{{%balancelog}}',[
+            'username'=>$this->string(),
+            'balance_info'=>$this->string(),
+            'time'=>$this->string(),
+        ]);
     }
 
     /**
@@ -28,5 +33,6 @@ class m220202_164658_create_users_table extends Migration
     public function safeDown()
     {
         $this->dropTable('{{%users}}');
+        $this->dropTable('{{%balancelog}}');
     }
 }

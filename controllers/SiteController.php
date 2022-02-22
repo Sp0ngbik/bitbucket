@@ -87,6 +87,10 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+    public function actionTransferlog(){
+        $model = new NewUser;
+        return $this->render('transferlog',['model'=>$model]);
+    }
     /**
      * Login action.
      *
