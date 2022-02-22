@@ -71,7 +71,8 @@ class SiteController extends Controller
             if($model->load(Yii::$app->request->post())){
                 $currentUsername = NewUser::findByUsername($model->currentUser);
                 $userSend = NewUser::findByUsername($model->usernameSend);
-                if($model->transferValidation($currentUsername,$userSend)||!$model->hasErrors()){
+                if($model->validate())
+                {
                     $currentUsername->balance -=  $model->valueToSend;
                     $currentUsername->update();
                     $userSend->balance +=  $model->valueToSend;
