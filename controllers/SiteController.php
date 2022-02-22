@@ -96,7 +96,9 @@ class SiteController extends Controller
     }
     public function actionTransferlog(){
         $model = new TransferForm;
-        return $this->render('transferlog',['model'=>$model]);
+        $log = new Balancelog;
+        $arrayLog = BalanceLog::find()->all();
+        return $this->render('transferlog',['log'=>$log,'arrayLog'=>$arrayLog]);
     }
     /**
      * Login action.
