@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\NewUser;
 use app\models\TransferForm;
 use app\models\Users;
+use app\models\Balancelog;
 class SiteController extends Controller
 {
     /**
@@ -68,13 +69,19 @@ class SiteController extends Controller
             $model = new TransferForm;
             $userForm = new Users;
             $model->scenario = 'fieldsUsername';
+            $log = new Balancelog;
             if($model->load(Yii::$app->request->post())){
                 $currentUsername = NewUser::findByUsername($model->currentUser);
                 $userSend = NewUser::findByUsername($model->usernameSend);
                 if($model->validate())
                 {
+                    $log->username = $model->currentUser;
+                    $log->balance_info = $currentUsername->balance .' - '. $model->valueToSend;
                     $currentUsername->balance -=  $model->valueToSend;
                     $currentUsername->update();
+                    $log->username_send = $model->usernameSend;
+                    $log->balance_recieve= $userSend->balance .' + '.$model->valueToSend;
+                    $log->save();
                     $userSend->balance +=  $model->valueToSend;
                     $userSend->update();
                     return $this->refresh();
@@ -86,6 +93,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+    public function actionTransferlog(){
+        $model = new TransferForm;
+        $log = new Balancelog;
+        $arrayLog = BalanceLog::find()->all();
+        return $this->render('transferlog',['log'=>$log,'arrayLog'=>$arrayLog]);
     }
     /**
      * Login action.
