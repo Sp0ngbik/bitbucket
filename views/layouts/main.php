@@ -38,7 +38,7 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Balance log', 'url' => ['/site/transferlog']],
+        ['label' => 'Balance', 'url' => ['/balancelog']],
         ['label' => 'Transfer', 'url' => ['/site/transfer']],
         ['label' => 'Users', 'url' =>   ['/users']
 
