@@ -77,6 +77,7 @@ class SiteController extends Controller
                 {
                     $log->username = $model->currentUser;
                     $log->balance_info = $currentUsername->balance .' - '. $model->valueToSend;
+                    $log->time = $log->current_date;
                     $currentUsername->balance -=  $model->valueToSend;
                     $currentUsername->update();
                     $log->username_send = $model->usernameSend;
