@@ -36,7 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'time',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                'urlCreator' => function ($action, 
+                //here was Balancelog
+                $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
