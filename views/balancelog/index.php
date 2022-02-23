@@ -16,9 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
+    <!-- <p>
         <?= Html::a('Create Balancelog', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    </p> -->
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -30,10 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'username:ntext',
+            'balance_info:ntext',
             'username_send:ntext',
             'balance_recieve:ntext',
-            'balance_info:ntext',
-            //'time',
+            'time',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, 
