@@ -8,7 +8,9 @@ use yii\widgets\ActiveForm;
 <div class="site-login">
 
 <?php foreach($arrayLog as $arrayLogs){
-    echo ' Username : '.$arrayLogs->username.' Balance : '.$arrayLogs->balance_info. ' Time : ' . $arrayLogs->time . ' Reciever '.$arrayLogs->username_send . ' Balance '. $arrayLogs->balance_recieve.'<br />';
+    echo ' Username : '.$arrayLogs->username.' ,Balance : '.$arrayLogs->balance_info.','.'<br />' . 
+    ' Reciever : '.$arrayLogs->username_send . ' ,Balance : '. $arrayLogs->balance_recieve.','.
+    '<br />'. ' Time : ' . $arrayLogs->time .';'.'<br/>'. ' ' . '<br/> ';
 }
 ?>
 

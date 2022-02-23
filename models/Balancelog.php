@@ -13,6 +13,7 @@ use Yii;
  */
 class Balancelog extends \yii\db\ActiveRecord
 {
+    public $current_date;
     /**
      * {@inheritdoc}
      */
@@ -36,6 +37,10 @@ class Balancelog extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+public function init(){
+parent::init();
+$this->current_date = date("Y-m-d H:i:s");
+}
     public function attributeLabels()
     {
         return [
