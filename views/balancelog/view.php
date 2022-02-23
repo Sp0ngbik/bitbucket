@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'username:ntext',
-            'username_send:ntext',
             'balance_recieve:ntext',
+            'username_send:ntext',
             'balance_info:ntext',
             'time',
         ],
