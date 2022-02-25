@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Balancelog;
+use app\models\NewUser;
 use app\models\BalancelogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -54,9 +55,14 @@ class BalancelogController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
+    {   $model = $this->findModel($id);
+        $log = Balancelog::findOne(['id'=>$id]);
+        $arrayLog=BalanceLog::find()->where(['username'=>$log->username])->all();
+        
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'arrayLog'=>$arrayLog,
+            'model' => $model,
+           
         ]);
     }
 
@@ -131,4 +137,6 @@ class BalancelogController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+  
 }
