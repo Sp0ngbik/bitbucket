@@ -118,9 +118,9 @@ class BalancelogController extends Controller
      */
     public function actionDelete($id)
     {  
-       
-            $this->findModel($id)->delete();
-        
+
+        $this->findModel($id)->delete();
+     
 
         return $this->redirect(['index']);
     }
