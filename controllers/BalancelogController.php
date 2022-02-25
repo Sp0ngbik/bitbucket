@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Balancelog;
+use app\models\TransferForm;
 use app\models\NewUser;
 use app\models\BalancelogSearch;
 use yii\web\Controller;
@@ -116,8 +117,10 @@ class BalancelogController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    {  
+       
+            $this->findModel($id)->delete();
+        
 
         return $this->redirect(['index']);
     }

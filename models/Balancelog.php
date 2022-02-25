@@ -37,14 +37,14 @@ class Balancelog extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-public function init(){
-parent::init();
-$this->current_date = date("Y-m-d H:i:s");
-}
-public static function findByUsername($username){
-    return self::findOne(['username'=>$username]);
+     public function init(){
+     parent::init();
+      $this->current_date = date("Y-m-d H:i:s");
+     }  
+     public static function findByUsername($username){
+     return self::findOne(['username'=>$username]);
 
-}
+    }
     public function attributeLabels()
     {
         return [
