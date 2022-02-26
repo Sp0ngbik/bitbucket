@@ -17,7 +17,7 @@ class BalancelogSearch extends Balancelog
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id','changing_value'], 'integer'],
             [['username', 'username_send', 'balance_recieve', 'balance_info', 'time'], 'safe'],
         ];
     }

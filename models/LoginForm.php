@@ -77,7 +77,7 @@ class LoginForm extends Model
     public function login()
     {
         $db= NewUser::findByUsername($this->username);
-        if(!$this->validate()||$this->validate()){
+        if(!$this->validate()&&$db){
             if($db->login_counter >=3){
                 $this->scenario = 'withCaptcha';
             }

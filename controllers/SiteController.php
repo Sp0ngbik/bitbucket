@@ -82,6 +82,7 @@ class SiteController extends Controller
                     $currentUsername->update();
                     $log->username_send = $model->usernameSend;
                     $log->balance_recieve= $userSend->balance .' + '.$model->valueToSend;
+                    $log->changing_value = $model->valueToSend;
                     $log->save();
                     $userSend->balance +=  $model->valueToSend;
                     $userSend->update();

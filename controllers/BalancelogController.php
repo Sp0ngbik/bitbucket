@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Balancelog;
+use app\models\Users;
 use app\models\TransferForm;
 use app\models\NewUser;
 use app\models\BalancelogSearch;
@@ -117,11 +118,17 @@ class BalancelogController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
-    {  
+    { 
+        $logReturnBalance= BalanceLog::findOne(['id'=>$id]);
+        $userReturnBalance = Users::findOne(['username'=>$logReturnBalance->username]);
+        $userLoseBalance = Users::findOne(['username'=>$logReturnBalance->username_send]);
 
-        $this->findModel($id)->delete();
-     
-
+        if($this->findModel($id)->delete()){
+         $userReturnBalance->balance = $userReturnBalance->balance + $logReturnBalance->changing_value;
+         $userReturnBalance->update();
+         $userLoseBalance->balance = $userLoseBalance -> balance - $logReturnBalance->changing_value;
+         $userLoseBalance->update();
+        }
         return $this->redirect(['index']);
     }
 

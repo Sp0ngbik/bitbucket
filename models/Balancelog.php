@@ -30,6 +30,7 @@ class Balancelog extends \yii\db\ActiveRecord
         return [
             // [['username','username_send', 'balance_info', 'time'], 'required'],
             [['username','username_send', 'balance_info','balance_recieve','id'], 'string'],
+            ['changing_value','integer'],
             [['time'], 'safe'],
         ];
     }
