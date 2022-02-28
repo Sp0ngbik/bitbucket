@@ -60,8 +60,10 @@ class BalancelogController extends Controller
     {   $model = $this->findModel($id);
         $log = Balancelog::findOne(['id'=>$id]);
         $arrayLog=BalanceLog::find()->where(['username'=>$log->username])->all();
+        $arrayLogRecieves=BalanceLog::find()->where(['username_send'=>$log->username])->all();
         
         return $this->render('view', [
+            'arrayLogRecieves'=>$arrayLogRecieves,
             'arrayLog'=>$arrayLog,
             'model' => $model,
            
