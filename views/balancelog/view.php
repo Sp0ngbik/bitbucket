@@ -9,7 +9,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Balancelog */
 
-$this->title = $model->username;
+$this->title = $log->username;
 $this->params['breadcrumbs'][] = ['label' => 'Balancelogs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -36,8 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
 }; ?>
     </div>
 </div> -->
-<h1><?= Html::encode('Sends')?></h1>
-<?= GridView::widget([
+<div class="balancelog-view">
+<h1><?= Html::encode('Balance view of user ' .$this->title) ?></h1>
+    <h3><?= Html::encode($log->username . ' sends')?></h3>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -49,28 +51,31 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, 
-                //here was Balancelog
                 $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
-<h1><?= Html::encode('Recieves')?></h1>    
+<h3><?= Html::encode($log->username . ' recieves')?></h3>    
 <?= GridView::widget([
-        'dataProvider' => $dataProviderReciever,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'username:ntext',
-            'balance_info:ntext',
-            'username_send:ntext',
-            'balance_recieve:ntext',
-            'time',
-            [
-                'class' => ActionColumn::className(),
-         
-            ],
+    'dataProvider' => $dataProviderReciever,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'username:ntext',
+        'balance_info:ntext',
+        'username_send:ntext',
+        'balance_recieve:ntext',
+        'time',
+        [
+            'class' => ActionColumn::className(),
+            'urlCreator' => function ($action, 
+            $model, $key, $index, $column) {
+                return Url::toRoute([$action, 'id' => $model->id]);
+            }
         ],
-    ]); ?>
+    ],
+]); ?>
 
+</div>
 </div>
