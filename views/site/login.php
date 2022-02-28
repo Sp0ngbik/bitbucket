@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if ($model->scenario == 'withCaptcha') : ?>
         <div class="column">
             <div>
-                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                <?= $form->field($model, 'verifyCode')->widget(Captcha::class, [
                     'template' => '<span class="row"><span class="col-lg-5">{image}</span><span class="col-lg-12">{input}</span></span>',
                 ]) ?>
             </div>
