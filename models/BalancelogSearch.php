@@ -38,6 +38,66 @@ class BalancelogSearch extends Balancelog
      *
      * @return ActiveDataProvider
      */
+   public function searchUserSend ($username){
+    $query = Balancelog::find()->where(['username'=>$username,]);
+
+    // add conditions that should always apply here
+
+    $dataProvider = new ActiveDataProvider([
+        'query' => $query,
+    ]);
+
+    $this->load($username);
+
+    if (!$this->validate()) {
+        // uncomment the following line if you do not want to return any records when validation fails
+        // $query->where('0=1');
+        return $dataProvider;
+    }
+
+    // grid filtering conditions
+    $query->andFilterWhere([
+        'id' => $this->id,
+        'time' => $this->time,
+    ]);
+
+    $query->andFilterWhere(['like', 'username', $this->username])
+        ->andFilterWhere(['like', 'username_send', $this->username_send])
+        ->andFilterWhere(['like', 'balance_recieve', $this->balance_recieve])
+        ->andFilterWhere(['like', 'balance_info', $this->balance_info]);
+
+    return $dataProvider;
+}
+public function searchUserRecieve($user_recieve){
+    $query = Balancelog::find()->where(['username_send'=>$user_recieve,]);
+
+    // add conditions that should always apply here
+
+    $dataProvider = new ActiveDataProvider([
+        'query' => $query,
+    ]);
+
+    $this->load($user_recieve);
+
+    if (!$this->validate()) {
+        // uncomment the following line if you do not want to return any records when validation fails
+        // $query->where('0=1');
+        return $dataProvider;
+    }
+
+    // grid filtering conditions
+    $query->andFilterWhere([
+        'id' => $this->id,
+        'time' => $this->time,
+    ]);
+
+    $query->andFilterWhere(['like', 'username', $this->username])
+        ->andFilterWhere(['like', 'username_send', $this->username_send])
+        ->andFilterWhere(['like', 'balance_recieve', $this->balance_recieve])
+        ->andFilterWhere(['like', 'balance_info', $this->balance_info]);
+
+    return $dataProvider;
+}
     public function search($params)
     {
         $query = Balancelog::find();
