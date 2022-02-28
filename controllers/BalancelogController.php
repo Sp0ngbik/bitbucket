@@ -65,7 +65,6 @@ class BalancelogController extends Controller
         $dataProvider = $searchModel->searchUserSend($arrayLog);
         $dataProviderReciever = $searchModel->searchUserRecieve($arrayLogRecieves);
         return $this->render('view', [
-
             'arrayLogRecieves'=>$arrayLogRecieves,
             'arrayLog'=>$arrayLog,
             'dataProvider' => $dataProvider,
