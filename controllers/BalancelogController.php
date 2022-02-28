@@ -34,7 +34,7 @@ class BalancelogController extends Controller
         );
     }
 
-    /**
+    /**  
      * Lists all Balancelog models.
      *
      * @return string
@@ -57,20 +57,20 @@ class BalancelogController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {   
-        $log = Balancelog::findOne(['id'=>$id]);
-        $arrayLog=BalanceLog::find()->where(['username'=>$log->username])->all();
-        $arrayLogRecieves=BalanceLog::find()->where(['username_send'=>$log->username])->all();
+    {
+        $log = Balancelog::findOne(['id' => $id]);
+        $arrayLog = BalanceLog::find()->where(['username' => $log->username])->all();
+        $arrayLogRecieves = BalanceLog::find()->where(['username_send' => $log->username])->all();
         $searchModel = new BalancelogSearch();
         $dataProvider = $searchModel->searchUserSend($arrayLog);
         $dataProviderReciever = $searchModel->searchUserRecieve($arrayLogRecieves);
         return $this->render('view', [
-            'arrayLogRecieves'=>$arrayLogRecieves,
-            'arrayLog'=>$arrayLog,
+            'arrayLogRecieves' => $arrayLogRecieves,
+            'arrayLog' => $arrayLog,
             'dataProvider' => $dataProvider,
             'dataProviderReciever' => $dataProviderReciever,
             'log' => $log,
-           
+
         ]);
     }
 
@@ -98,23 +98,12 @@ class BalancelogController extends Controller
 
     /**
      * Updates an existing Balancelog model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * If update is successful, the browser will be redirected to the 'view' page. 
      * @param int $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
 
     /**
      * Deletes an existing Balancelog model.
@@ -124,16 +113,16 @@ class BalancelogController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
-    { 
-        $logReturnBalance= BalanceLog::findOne(['id'=>$id]);
-        $userReturnBalance = Users::findOne(['username'=>$logReturnBalance->username]);
-        $userLoseBalance = Users::findOne(['username'=>$logReturnBalance->username_send]);
+    {
+        $logReturnBalance = BalanceLog::findOne(['id' => $id]);
+        $userReturnBalance = Users::findOne(['username' => $logReturnBalance->username]);
+        $userLoseBalance = Users::findOne(['username' => $logReturnBalance->username_send]);
 
-        if($this->findModel($id)->delete()){
-         $userReturnBalance->balance = $userReturnBalance->balance + $logReturnBalance->changing_value;
-         $userReturnBalance->update();
-         $userLoseBalance->balance = $userLoseBalance -> balance - $logReturnBalance->changing_value;
-         $userLoseBalance->update();
+        if ($this->findModel($id)->delete()) {
+            $userReturnBalance->balance = $userReturnBalance->balance + $logReturnBalance->changing_value;
+            $userReturnBalance->update();
+            $userLoseBalance->balance = $userLoseBalance->balance - $logReturnBalance->changing_value;
+            $userLoseBalance->update();
         }
         return $this->redirect(['index']);
     }
@@ -153,6 +142,4 @@ class BalancelogController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-  
 }

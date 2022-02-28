@@ -20,27 +20,28 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Balancelog', ['create'], ['class' => 'btn btn-success']) ?>
     </p> -->
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            // 'id',
             'username:ntext',
             'balance_info:ntext',
             'username_send:ntext',
             'balance_recieve:ntext',
             'time',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, 
-                //here was Balancelog
-                $model, $key, $index, $column) {
+                'class' => ActionColumn::className(), 'template' => '{view} {delete}',
+                'urlCreator' => function (
+                    $action,
+                    $model,
+                    $key,
+                    $index,
+                    $column
+                ) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

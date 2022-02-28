@@ -33,8 +33,8 @@ class LoginForm extends Model
             // password is validated by validatePassword()
             ['password', 'validatePassword',],
             //added captcha here for rules , from users
-            ['verifyCode', 'captcha','on'=>'withCaptcha',],
-           
+            ['verifyCode', 'captcha', 'on' => 'withCaptcha',],
+
         ];
     }
 
@@ -45,28 +45,27 @@ class LoginForm extends Model
      * @param string $attribute the attribute currently being validated
      * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            $db= NewUser::findByUsername($this->username);
-         
-            if (!$user || !$user->validatePassword($this->password)) {
-                if(!$user){
-                    $this->addError($attribute,'Incorrect username or password.');
-                }else {
-                    $db->login_counter = $db->login_counter +1;
+            $db = NewUser::findByUsername($this->username);
+
+            if (!$user || !$user->validatePassword($this->password, $attribute)) {
+                if (!$user) {
+                    $this->addError($attribute, 'Incorrect username or password.');
+                } else {
+                    $db->login_counter = $db->login_counter + 1;
                     $db->update();
-                    $this->addError($attribute, 'Incorrect username or password.');    
-                        if($db->login_counter >=3){
-                            $this->scenario = 'withCaptcha';
-                        }
+                    $this->addError($attribute, 'Incorrect username or password.');
+                    if ($db->login_counter >= 3) {
+                        $this->scenario = 'withCaptcha';
+                    }
                 }
-            }else{
-                $db->login_counter=0;
+            } else {
+                $db->login_counter = 0;
                 $db->update();
             }
-        
         }
     }
 
@@ -76,29 +75,28 @@ class LoginForm extends Model
      */
     public function login()
     {
-        $db= NewUser::findByUsername($this->username);
-        if(!$this->validate()&&$db){
-            if($db->login_counter >=3){
+        $db = NewUser::findByUsername($this->username);
+        if (!$this->validate() && $db) {
+            if ($db->login_counter >= 3) {
                 $this->scenario = 'withCaptcha';
             }
         }
-       
+
         if ($this->validate()) {
-           if($db->login_counter >=3 ){
-               $this->scenario = 'withCaptcha';
-           }else{
+            if ($db->login_counter >= 3) {
+                $this->scenario = 'withCaptcha';
+            } else {
 
-               return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-           }
-        }else if(!$this->getUser() ){
+                return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            }
+        } else if (!$this->getUser()) {
             $this->scenario = 'withCaptcha';
-
         }
 
-        
+
         return false;
     }
-   
+
     /**
      * Finds user by [[username]]
      *
@@ -108,7 +106,6 @@ class LoginForm extends Model
     {
         if ($this->_user === false) {
             $this->_user = NewUser::findByUsername($this->username);
-            
         }
 
         return $this->_user;

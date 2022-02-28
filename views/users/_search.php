@@ -15,11 +15,11 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-<?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'id') ?>
 
-<?= $form->field($model, 'username') ?>
+    <?= $form->field($model, 'username') ?>
 
-<?= $form->field($model, 'password') ?>
+    <?= $form->field($model, 'password') ?>
 
 
 

@@ -25,7 +25,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'balance_info') ?>
 
-    <?php // echo $form->field($model, 'time') ?>
+    <?php // echo $form->field($model, 'time') 
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -22,15 +22,15 @@ class Balancelog extends \yii\db\ActiveRecord
         return '{{%balancelog}}';
     }
 
-    /**
+    /** 
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
             // [['username','username_send', 'balance_info', 'time'], 'required'],
-            [['username','username_send', 'balance_info','balance_recieve','id'], 'string'],
-            ['changing_value','integer'],
+            [['username', 'username_send', 'balance_info', 'balance_recieve', 'id'], 'string'],
+            ['changing_value', 'integer'],
             [['time'], 'safe'],
         ];
     }
@@ -38,20 +38,21 @@ class Balancelog extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-     public function init(){
-     parent::init();
-      $this->current_date = date("Y-m-d H:i:s");
-     }  
-     public static function findByUsername($username){
-     return self::findOne(['username'=>$username]);
-
+    public function init()
+    {
+        parent::init();
+        $this->current_date = date("Y-m-d H:i:s");
+    }
+    public static function findByUsername($username)
+    {
+        return self::findOne(['username' => $username]);
     }
     public function attributeLabels()
     {
         return [
             'username' => 'Sender',
-            'username_send'=>'Reciever',
-            'balance_recieve'=>'Recieved balance',
+            'username_send' => 'Reciever',
+            'balance_recieve' => 'Recieved balance',
             'balance_info' => 'Balance Info',
             'time' => 'Operation time',
         ];

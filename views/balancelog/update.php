@@ -1,15 +1,15 @@
-<?php
+<!-- <?php
 
-use yii\helpers\Html;
+        use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Balancelog */
+        /* @var $this yii\web\View */
+        /* @var $model app\models\Balancelog */
 
-$this->title = 'Update Balancelog: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Balancelogs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
-?>
+        $this->title = 'Update Balancelog: ' . $model->id;
+        $this->params['breadcrumbs'][] = ['label' => 'Balancelogs', 'url' => ['index']];
+        $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+        $this->params['breadcrumbs'][] = 'Update';
+        ?>
 <div class="balancelog-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -18,4 +18,4 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
     ]) ?>
 
-</div>
+</div> -->

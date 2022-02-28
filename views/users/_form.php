@@ -13,7 +13,7 @@ use yii\widgets\Alert;
 <div class="users-form">
 
 
-  
+
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username')->textarea(['rows' => 6]) ?>
@@ -21,11 +21,11 @@ use yii\widgets\Alert;
     <?= $form->field($model, 'newPasswordConfirm')->textarea(['rows' => 1])->label("Confirm new password") ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success'])?>
-        
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+
     </div>
 
-    <?php ActiveForm::end()?>
-    
+    <?php ActiveForm::end() ?>
+
 
 </div>
