@@ -98,7 +98,7 @@ class BalancelogController extends Controller
 
     /**
      * Updates an existing Balancelog model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * If update is successful, the browser will be redirected to the 'view' page. 
      * @param int $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found

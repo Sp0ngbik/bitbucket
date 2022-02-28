@@ -15,23 +15,23 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="users-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-   <p>
+    <p>
         <?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
-    </p> 
-  
+    </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'username:ntext', 
+            'username:ntext',
             'password:ntext',
             'id',
             [
-                'class' => ActionColumn::className(),
-              
+                'class' => ActionColumn::class,
+
             ],
         ],
     ]); ?>
-    
+
 </div>

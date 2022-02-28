@@ -133,7 +133,7 @@ class BalancelogSearch extends Balancelog
     }
 }
 
-
+ 
 
 // Disable the built-in VSCode PHP Language Features.
 

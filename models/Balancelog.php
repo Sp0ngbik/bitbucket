@@ -22,7 +22,7 @@ class Balancelog extends \yii\db\ActiveRecord
         return '{{%balancelog}}';
     }
 
-    /**
+    /** 
      * {@inheritdoc}
      */
     public function rules()

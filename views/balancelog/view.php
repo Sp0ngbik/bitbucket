@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'balance_recieve:ntext',
             'time',
             [
-                'class' => ActionColumn::className(), 'template' => '{view} {delete}',
+                'class' => ActionColumn::class, 'template' => '{view} {delete}',
                 'urlCreator' => function (
                     $action,
                     $model,
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'balance_recieve:ntext',
             'time',
             [
-                'class' => ActionColumn::className(), 'template' => '{view} {delete}',
+                'class' => ActionColumn::class, 'template' => '{view} {delete}',
                 'urlCreator' => function (
                     $action,
                     $model,
