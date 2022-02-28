@@ -49,9 +49,11 @@ class Balancelog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'username' => 'Username',
+            'username' => 'Sender',
+            'username_send'=>'Reciever',
+            'balance_recieve'=>'Recieved balance',
             'balance_info' => 'Balance Info',
-            'time' => 'Time',
+            'time' => 'Operation time',
         ];
     }
 }

@@ -57,15 +57,19 @@ class BalancelogController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {   $model = $this->findModel($id);
+    {   
         $log = Balancelog::findOne(['id'=>$id]);
         $arrayLog=BalanceLog::find()->where(['username'=>$log->username])->all();
         $arrayLogRecieves=BalanceLog::find()->where(['username_send'=>$log->username])->all();
-        
+        $searchModel = new BalancelogSearch();
+        $dataProvider = $searchModel->searchUserSend($arrayLog);
+        $dataProviderReciever = $searchModel->searchUserRecieve($arrayLogRecieves);
         return $this->render('view', [
             'arrayLogRecieves'=>$arrayLogRecieves,
             'arrayLog'=>$arrayLog,
-            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'dataProviderReciever' => $dataProviderReciever,
+            'log' => $log,
            
         ]);
     }
