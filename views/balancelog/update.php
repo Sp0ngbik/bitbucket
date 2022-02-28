@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 use yii\helpers\Html;
 
@@ -18,4 +18,4 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
     ]) ?>
 
-</div>
+</div> -->
